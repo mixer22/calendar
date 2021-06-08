@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@android:color/white">
+
+    <com.emc.verticalweekcalendar.VerticalWeekCalendar
+        android:id="@+id/verticalCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        app:customFont="quicksand_bold"
+        app:selectedBackground="@color/colorSelectedDayBG"/>
+
+    <View
+        android:id="@+id/verticalDivider"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@id/verticalCalendar"
+        android:background="?android:attr/listDivider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/verticalDivider"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textCity"
+                android:layout_width="108dp"
+                android:layout_height="37dp"
+                android:textSize="24sp"
+                android:text="City"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/textTemp"
+                android:layout_width="104dp"
+                android:layout_height="34dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="60dp"
+                android:textSize="24sp"
+                android:text="Temp"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/imageIcon"
+                android:layout_width="118dp"
+                android:layout_height="86dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="28dp"
+                app:srcCompat="@drawable/heart_24" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Time" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickBtn"
+                android:text="Add" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickBtn"
+                android:text="Clean" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
