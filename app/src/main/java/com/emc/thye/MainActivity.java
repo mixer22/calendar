@@ -25,15 +25,15 @@ import com.emc.verticalweekcalendar.interfaces.OnDateClickListener;
 import com.emc.verticalweekcalendar.model.CalendarDay;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
+import java.text.ParseException; // add
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import retrofit2.Call; // add
+import retrofit2.Callback; // add
+import retrofit2.Response; // add
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private VerticalWeekCalendar calendarView;
     EditText editTextLabel;
     EditText editTextTime;
-    TextView textTemp;
-    TextView textCity;
+    TextView textTemp; // add
+    TextView textCity; // add
     ImageView imageView;
     TimePickerDialog timePickerDialog;
     Button btn_add, btn_clean;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     Cursor userCursor;
     SQLiteDatabase db;
     Calendar calendar;
-    private WeatherAPI.ApiInterface api;
+    private WeatherAPI.ApiInterface api; // add
     int currentHour;
     int currentMinute;
 
@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        api = WeatherAPI.getClient().create(WeatherAPI.ApiInterface.class);
+        api = WeatherAPI.getClient().create(WeatherAPI.ApiInterface.class); // add
         editTextLabel = findViewById(R.id.editText1);
         editTextTime = findViewById(R.id.editTextTime);
-        textCity = findViewById(R.id.textCity);
-        textTemp = findViewById(R.id.textTemp);
+        textCity = findViewById(R.id.textCity); // add
+        textTemp = findViewById(R.id.textTemp); // add
         imageView = findViewById(R.id.imageIcon);
         btn_add = findViewById(R.id.button);
         btn_clean = findViewById(R.id.button2);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         databaseHelper = new DataBaseHelper(getApplicationContext());
         Log.e("Table", DataBaseHelper.TABLE);
         setDataToAdaper();
-        getWeather();
+        getWeather(); // add
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View itemClicked, int position, long id) {
@@ -175,8 +175,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(userAdapter);
     }
 
-    public void getWeather() {
-        Double lat = 52.28697409;
+    public void getWeather() { // add all
+        Double lat = 52.28697409; 
         Double lng = 104.3050183;
         String units = "metric";
         String key = WeatherAPI.KEY;
@@ -190,33 +190,11 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     textTemp.setText(data.getTempWithDegree());
                     textCity.setText(data.getCity());
-                    Picasso.get().load(data.getIconUrl()).into(imageView);
                 }
             }
 
             @Override
             public void onFailure(Call<WeatherDay> call, Throwable t) {
-                Log.e("Weather", "onFailure");
-                Log.e("Weather", t.toString());
-            }
-        });
-
-        Call<WeatherForecast> callForecast = api.getForecast(lat, lng, units, key);
-        callForecast.enqueue(new Callback<WeatherForecast>() {
-            @Override
-            public void onResponse(Call<WeatherForecast> call, Response<WeatherForecast> response) {
-                Log.e("Weather", "onResponse");
-                WeatherForecast data = response.body();
-
-                if (response.isSuccessful()) {
-                    for (WeatherDay day : data.getItems()) {
-                        Log.d("Weather", day.getTemp() );
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<WeatherForecast> call, Throwable t) {
                 Log.e("Weather", "onFailure");
                 Log.e("Weather", t.toString());
             }
