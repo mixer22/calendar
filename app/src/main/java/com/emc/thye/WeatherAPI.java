@@ -19,14 +19,6 @@ public class WeatherAPI {
                 @Query("units") String units,
                 @Query("appid") String appid
         );
-
-        @GET("forecast")
-        Call<WeatherForecast> getForecast(
-                @Query("lat") Double lat,
-                @Query("lon") Double lon,
-                @Query("units") String units,
-                @Query("appid") String appid
-        );
     }
 
     public static Retrofit getClient() {
